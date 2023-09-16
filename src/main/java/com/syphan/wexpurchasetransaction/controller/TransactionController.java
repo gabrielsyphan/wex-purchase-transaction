@@ -1,17 +1,47 @@
 package com.syphan.wexpurchasetransaction.controller;
 
+import com.syphan.wexpurchasetransaction.exception.InvalidTransactionException;
+import com.syphan.wexpurchasetransaction.exception.TransactionNotFoundException;
+import com.syphan.wexpurchasetransaction.model.dto.TransactionDto;
+import com.syphan.wexpurchasetransaction.service.transaction.TransactionService;
 import com.syphan.wexpurchasetransaction.util.constant.PathConstants;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = PathConstants.BASE_PATH_TRANSACTION, produces = "application/json")
 public class TransactionController {
 
+    private final TransactionService transactionService;
+
+    @Autowired
+    public TransactionController(TransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
+
+    @PostMapping(consumes = "application/json")
+    public ResponseEntity<TransactionDto> create(@RequestBody @Valid TransactionDto transactionDto, UriComponentsBuilder uriComponentsBuilder) throws InvalidTransactionException {
+        TransactionDto result = this.transactionService.create(transactionDto);
+        URI uri = uriComponentsBuilder.path(PathConstants.BASE_PATH_TRANSACTION + "/{id}").buildAndExpand(result.id()).toUri();
+        return ResponseEntity.created(uri).body(result);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<TransactionDto> getById(@PathVariable("id") UUID id) throws TransactionNotFoundException {
+        return ResponseEntity.ok(this.transactionService.getById(id));
+    }
+
     @GetMapping
-    public String getTransaction() {
-        // TODO: implement get transaction
-        return "Transaction works";
+    public ResponseEntity<Page<TransactionDto>> getAll(@RequestParam int page, @RequestParam int size) throws TransactionNotFoundException {
+
+        return ResponseEntity.ok(this.transactionService.getAll(page, size));
     }
 }

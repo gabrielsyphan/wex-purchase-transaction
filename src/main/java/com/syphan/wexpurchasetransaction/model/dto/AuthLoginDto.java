@@ -1,4 +1,4 @@
-package com.syphan.wexpurchasetransaction.model.dto.general;
+package com.syphan.wexpurchasetransaction.model.dto;
 
 import javax.validation.constraints.NotBlank;
 

@@ -1,6 +1,6 @@
 package com.syphan.wexpurchasetransaction.util.handler;
 
-import com.syphan.wexpurchasetransaction.model.dto.config.GenericExceptionDto;
+import com.syphan.wexpurchasetransaction.model.dto.GenericExceptionDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,6 +17,14 @@ public class GenericExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<GenericExceptionDto> entityNotFound(EntityNotFoundException exception) {
         return ResponseEntity.badRequest().body(new GenericExceptionDto(exception.getMessage()));
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<List<GenericExceptionDto>> methodArgumentNotValidException(MethodArgumentNotValidException exception) {
+        List<FieldError> errors = exception.getBindingResult().getFieldErrors();
+        return ResponseEntity.badRequest().body(
+                errors.stream().map(GenericExceptionDto::new).collect(Collectors.toList())
+        );
     }
 
     @ExceptionHandler(Exception.class)

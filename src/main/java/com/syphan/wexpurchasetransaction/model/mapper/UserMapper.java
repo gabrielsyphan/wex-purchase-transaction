@@ -1,7 +1,7 @@
 package com.syphan.wexpurchasetransaction.model.mapper;
 
-import com.syphan.wexpurchasetransaction.model.dto.general.UserDto;
-import com.syphan.wexpurchasetransaction.model.entity.UserEntity;
+import com.syphan.wexpurchasetransaction.model.dto.UserDto;
+import com.syphan.wexpurchasetransaction.model.entity.User;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,11 +13,12 @@ public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    UserEntity dtoToEntity(UserDto dto);
+    User dtoToEntity(UserDto dto);
 
-    UserDto entityToDto(UserEntity entity);
+    @Mapping(target = "password", ignore = true)
+    UserDto entityToDto(User entity);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "authorities", ignore = true)
-    UserEntity updateEntity(UserEntity userEntity, @MappingTarget UserEntity userEntityUpdate);
+    User updateEntity(User user, @MappingTarget User userUpdate);
 }

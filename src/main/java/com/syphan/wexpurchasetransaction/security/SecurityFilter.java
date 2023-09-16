@@ -1,6 +1,5 @@
-package com.syphan.wexpurchasetransaction.authentication;
+package com.syphan.wexpurchasetransaction.security;
 
-import com.syphan.wexpurchasetransaction.model.entity.UserEntity;
 import com.syphan.wexpurchasetransaction.repository.UserRepository;
 import com.syphan.wexpurchasetransaction.util.constant.PathConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.UUID;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
@@ -37,7 +37,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         } else if(jwtToken != null) {
             String subject = this.tokenService.getSubject(jwtToken);
 
-            UserDetails userDetails = this.userRepository.findById(Long.valueOf(subject)).orElseThrow(
+            UserDetails userDetails = this.userRepository.findById(UUID.fromString(subject)).orElseThrow(
                     () -> new ServletException("User not found.")
             );
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
