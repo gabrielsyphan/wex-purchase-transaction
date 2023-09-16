@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.UUID;
 
 @Table(name = "users")
 @Entity
@@ -18,11 +18,12 @@ import java.util.Collection;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntity implements UserDetails {
+public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    @Column(name = "id", updatable = false, nullable = false, unique = true, columnDefinition = "BINARY(16)")
+    private UUID id;
 
     @Column(name = "name", length = 40, nullable = false)
     private String name;

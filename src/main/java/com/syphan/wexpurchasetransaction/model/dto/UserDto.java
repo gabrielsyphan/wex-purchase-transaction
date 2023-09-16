@@ -1,10 +1,13 @@
-package com.syphan.wexpurchasetransaction.model.dto.general;
+package com.syphan.wexpurchasetransaction.model.dto;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.validation.constraints.NotBlank;
+import java.util.UUID;
 
 public record UserDto (
 
-        Long id,
+        UUID id,
 
         @NotBlank(message = "Name is required.")
         String name,
@@ -13,5 +16,6 @@ public record UserDto (
         String email,
 
         @NotBlank(message = "Password is required.")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         String password
 ) {}

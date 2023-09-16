@@ -10,5 +10,5 @@ public class PathConstants {
 
     public static final String BASE_PATH_AUTH_SUBSCRIBE = BASE_PATH_AUTH + "/subscribe";
 
-    public static final String BASE_PATH_TRANSACTION = BASE_PATH + "/transaction";
+    public static final String BASE_PATH_TRANSACTION = BASE_PATH + "/transactions";
 }
