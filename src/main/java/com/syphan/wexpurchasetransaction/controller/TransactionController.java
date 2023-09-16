@@ -35,13 +35,13 @@ public class TransactionController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<TransactionDto> getById(@PathVariable("id") UUID id) throws TransactionNotFoundException {
-        return ResponseEntity.ok(this.transactionService.getById(id));
+    public ResponseEntity<TransactionDto> getById(@PathVariable("id") UUID id, @RequestParam String country) throws TransactionNotFoundException {
+        return ResponseEntity.ok(this.transactionService.getById(id, country));
     }
 
     @GetMapping
-    public ResponseEntity<Page<TransactionDto>> getAll(@RequestParam int page, @RequestParam int size) throws TransactionNotFoundException {
+    public ResponseEntity<Page<TransactionDto>> getAll(@RequestParam int page, @RequestParam int size, @RequestParam String country) throws TransactionNotFoundException {
 
-        return ResponseEntity.ok(this.transactionService.getAll(page, size));
+        return ResponseEntity.ok(this.transactionService.getAll(page, size, country));
     }
 }

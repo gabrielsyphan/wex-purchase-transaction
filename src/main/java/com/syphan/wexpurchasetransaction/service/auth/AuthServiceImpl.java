@@ -47,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
 
             return UserMapper.INSTANCE.entityToDto(this.userRepository.save(user));
         } catch (InvalidUserException e) {
-            this.logger.severe("AuthServiceImpl -> createUser(): Email already exists.");
+            this.logger.severe("AuthServiceImpl -> createUser(): " + e.getMessage());
             throw e;
         } catch (Exception e) {
             this.logger.severe("AuthServiceImpl -> createUser(): Error when create user. " + e.getMessage());

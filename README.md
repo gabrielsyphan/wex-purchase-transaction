@@ -22,12 +22,14 @@ Repository for the Wex project.
 - [Lombok](https://projectlombok.org/)
 - [Maven](https://maven.apache.org/)
 - [Flyway](https://flywaydb.org/)
+- [Caffeine](https://www.baeldung.com/spring-boot-caffeine-cache)
 - [JUnit](https://junit.org/junit5/)
 - [Mockito](https://site.mockito.org/)
 - [MapStruct](https://mapstruct.org/)
 - [SpringSecurity](https://spring.io/projects/spring-security)
 - [SpringData](https://spring.io/projects/spring-data)
 - [SpringValidation](https://spring.io/guides/gs/validating-form-input/)
+- [Cache](https://spring.io/guides/gs/caching/)
 
 ## Contributors
 - [Gabriel Syphan](https://linkedin.com/in/gabrielsyphan)

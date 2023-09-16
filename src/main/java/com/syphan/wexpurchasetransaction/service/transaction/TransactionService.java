@@ -11,7 +11,7 @@ public interface TransactionService {
 
     TransactionDto create(TransactionDto transactionDto) throws InvalidTransactionException;
 
-    TransactionDto getById(UUID id) throws TransactionNotFoundException;
+    TransactionDto getById(UUID id, String country) throws TransactionNotFoundException;
 
-    Page<TransactionDto> getAll(int page, int size);
+    Page<TransactionDto> getAll(int page, int size, String country);
 }
