@@ -19,7 +19,7 @@ it, you can change the `application.yml` file to use an in-memory database like 
 content as example.
 
 1. Run `mvn clean install` in the root folder
-2. Copy the `.env.example` file to `.env` and fill the variables
+2. Copy the `.env.example` file to `.env` and fill the variables. If you don't want to fill a thing, you can just rename and it will works as well.
 3. Run `java -jar target/wex-0.0.1-SNAPSHOT.jar` in the root folder
 4. Access the application at `http://localhost:2984/swagger-ui/index.html#/`
 
