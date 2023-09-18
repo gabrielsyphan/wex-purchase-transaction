@@ -5,7 +5,7 @@ Repository for the Wex project.
 1. Clone the repository
 2. Copy the `.env.example` file to `.env` and fill the variables
 3. Run `docker-compose up -d --build` in the root folder
-4. Access the application at `http://localhost:2984/api/v1`
+4. Access the Api documentation at `http://localhost:2984/swagger-ui/index.html#/`
 
 ## Dependencies
 - [Docker](https://docs.docker.com/install/)
@@ -18,7 +18,7 @@ Repository for the Wex project.
 - [Spring Boot](https://spring.io/projects/spring-boot)
 
 ### Springboot Libraries
-- [Swagger](https://swagger.io/)
+- [SpringDoc](https://springdoc.org/)
 - [Lombok](https://projectlombok.org/)
 - [Maven](https://maven.apache.org/)
 - [Caffeine](https://www.baeldung.com/spring-boot-caffeine-cache)
