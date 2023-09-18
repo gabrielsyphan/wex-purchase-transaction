@@ -144,7 +144,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void getAllTransactionByUser() {
+    public void getAllTransactionByUserSuccess() {
         Page<Transaction> transactionPage = this.buildTransactionPage();
         String country = "Brazil";
         when(this.transactionRepository.findAllByUser(this.user, PageRequest.of(0, 50))).thenReturn(transactionPage);
