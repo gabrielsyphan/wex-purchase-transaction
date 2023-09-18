@@ -1,7 +1,7 @@
 # Wex Purchase Transaction
 Repository for the Wex project.
 
-## How to run
+## How to run (Recommended)
 1. Clone the repository
 2. Copy the `.env.example` file to `.env` and fill the variables
 3. Run `docker-compose up -d --build` in the root folder
