@@ -2,12 +2,14 @@ package com.syphan.wexpurchasetransaction.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
+@Builder
 public record DataTreasuryExchangeDto(
 
         @JsonFormat(pattern = "yyyy-MM-dd")
@@ -32,9 +34,10 @@ public record DataTreasuryExchangeDto(
         @NotBlank
         String exchangeRate,
 
+        @JsonFormat(pattern = "yyyy-MM-dd")
         @JsonProperty("effective_date")
         @NotNull
-        String effectiveDate,
+        LocalDate effectiveDate,
 
         @JsonProperty("src_line_nbr")
         @NotBlank

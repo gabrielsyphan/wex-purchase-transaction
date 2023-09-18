@@ -12,7 +12,7 @@ COPY . .
 RUN mvn clean package
 
 # Run the application
-CMD ["java", "-jar", "-Dspring.profiles.active=prod", "target/wexpt-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "-Dspring.profiles.active=prod", "target/wex-purchase-transaction-0.0.1-SNAPSHOT.jar"]
 
 # Expose the application port
 EXPOSE 2984
