@@ -1,4 +1,4 @@
-package com.syphan.wexpurchasetransaction.exception;
+package com.syphan.wexpurchasetransaction.util.exception;
 
 public class InvalidUserException extends RuntimeException {
 

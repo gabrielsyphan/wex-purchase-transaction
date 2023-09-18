@@ -1,10 +1,10 @@
-package com.syphan.wexpurchasetransaction.security;
+package com.syphan.wexpurchasetransaction.service.token;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-
 import com.syphan.wexpurchasetransaction.model.dto.UserDto;
 import com.syphan.wexpurchasetransaction.model.entity.User;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,19 +15,22 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 @Service
-public class TokenService {
+public class TokenServiceImpl implements TokenService {
 
     @Value("${JWT_SECRET}")
     private String secret;
 
+    @Override
     public String generateToken(UserDto user) {
         return this.generateToken(user.id().toString(), user.name(), user.email());
     }
 
+    @Override
     public String generateToken(User user) {
         return this.generateToken(user.getId().toString(), user.getName(), user.getEmail());
     }
 
+    @Override
     public String generateToken(String id, String name, String email) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(this.secret);
@@ -43,6 +46,7 @@ public class TokenService {
         }
     }
 
+    @Override
     public String getSubject(String jwtToken) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(this.secret);

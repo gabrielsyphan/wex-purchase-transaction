@@ -1,6 +1,6 @@
 package com.syphan.wexpurchasetransaction.service.auth;
 
-import com.syphan.wexpurchasetransaction.exception.InvalidUserException;
+import com.syphan.wexpurchasetransaction.util.exception.InvalidUserException;
 import com.syphan.wexpurchasetransaction.model.dto.UserDto;
 import com.syphan.wexpurchasetransaction.model.entity.User;
 import com.syphan.wexpurchasetransaction.model.mapper.UserMapper;
@@ -47,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
 
             return UserMapper.INSTANCE.entityToDto(this.userRepository.save(user));
         } catch (InvalidUserException e) {
-            this.logger.severe("AuthServiceImpl -> createUser(): Email already exists.");
+            this.logger.severe("AuthServiceImpl -> createUser(): " + e.getMessage());
             throw e;
         } catch (Exception e) {
             this.logger.severe("AuthServiceImpl -> createUser(): Error when create user. " + e.getMessage());
