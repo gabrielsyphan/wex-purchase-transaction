@@ -3,7 +3,7 @@ Repository for the Wex project.
 
 ## How to run (Recommended)
 1. Clone the repository
-2. Copy the `.env.example` file to `.env` and fill the variables
+2. Copy the `.env.example` file to `.env` and fill the variables. If you don't want to fill a thing, you can just rename and it will works as well.
 3. Run `docker-compose up -d --build` in the root folder
 4. Access the Api documentation at `http://localhost:2984/swagger-ui/index.html#/`
 
