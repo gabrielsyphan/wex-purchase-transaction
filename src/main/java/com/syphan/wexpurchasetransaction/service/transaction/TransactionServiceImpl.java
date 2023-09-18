@@ -1,8 +1,8 @@
 package com.syphan.wexpurchasetransaction.service.transaction;
 
 import com.syphan.wexpurchasetransaction.client.DataTreasuryClient;
-import com.syphan.wexpurchasetransaction.exception.InvalidTransactionException;
-import com.syphan.wexpurchasetransaction.exception.TransactionNotFoundException;
+import com.syphan.wexpurchasetransaction.util.exception.InvalidTransactionException;
+import com.syphan.wexpurchasetransaction.util.exception.TransactionNotFoundException;
 import com.syphan.wexpurchasetransaction.model.dto.DataTreasuryExchangeDto;
 import com.syphan.wexpurchasetransaction.model.dto.DataTreasuryResponseDto;
 import com.syphan.wexpurchasetransaction.model.dto.TransactionDto;

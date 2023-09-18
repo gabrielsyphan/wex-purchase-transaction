@@ -21,7 +21,6 @@ Repository for the Wex project.
 - [Swagger](https://swagger.io/)
 - [Lombok](https://projectlombok.org/)
 - [Maven](https://maven.apache.org/)
-- [Flyway](https://flywaydb.org/)
 - [Caffeine](https://www.baeldung.com/spring-boot-caffeine-cache)
 - [JUnit](https://junit.org/junit5/)
 - [Mockito](https://site.mockito.org/)

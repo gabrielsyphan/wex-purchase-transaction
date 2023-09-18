@@ -1,9 +1,9 @@
 package com.syphan.wexpurchasetransaction.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
@@ -16,13 +16,18 @@ import java.util.UUID;
 public record TransactionDto (
 
         UUID id,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         BigDecimal exchangeRate,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         BigDecimal calculatedAmount,
 
         @NotBlank(message = "Description is required.")
         String description,
 
         @NotNull(message = "Date is required.")
+        @JsonFormat(pattern = "yyyy-MM-dd")
         LocalDate date,
 
         @NotNull(message = "Amount is required.")

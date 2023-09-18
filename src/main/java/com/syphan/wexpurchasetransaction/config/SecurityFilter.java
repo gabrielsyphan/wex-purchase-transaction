@@ -1,7 +1,9 @@
-package com.syphan.wexpurchasetransaction.security;
+package com.syphan.wexpurchasetransaction.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.syphan.wexpurchasetransaction.model.dto.GenericExceptionDto;
 import com.syphan.wexpurchasetransaction.repository.UserRepository;
-import com.syphan.wexpurchasetransaction.util.constant.PathConstants;
+import com.syphan.wexpurchasetransaction.service.token.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,21 +32,26 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String jwtToken = this.getToken(request);
+        try {
+            String jwtToken = this.getToken(request);
 
-        if (request.getRequestURI().contains(PathConstants.BASE_PATH_AUTH)) {
+            if(jwtToken != null) {
+                String subject = this.tokenService.getSubject(jwtToken);
+
+                UserDetails userDetails = this.userRepository.findById(UUID.fromString(subject)).orElseThrow(
+                        () -> new ServletException("User not found.")
+                );
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+
             filterChain.doFilter(request, response);
-        } else if(jwtToken != null) {
-            String subject = this.tokenService.getSubject(jwtToken);
+        } catch (RuntimeException e) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String errorJson = objectMapper.writeValueAsString(new GenericExceptionDto(e.getMessage()));
 
-            UserDetails userDetails = this.userRepository.findById(UUID.fromString(subject)).orElseThrow(
-                    () -> new ServletException("User not found.")
-            );
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            filterChain.doFilter(request, response);
-        } else {
+            response.getWriter().write(errorJson);
+            response.setContentType("application/json;charset=UTF-8");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }

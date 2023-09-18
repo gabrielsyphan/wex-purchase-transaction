@@ -1,6 +1,6 @@
 package com.syphan.wexpurchasetransaction.service.auth;
 
-import com.syphan.wexpurchasetransaction.exception.InvalidUserException;
+import com.syphan.wexpurchasetransaction.util.exception.InvalidUserException;
 import com.syphan.wexpurchasetransaction.model.dto.UserDto;
 import com.syphan.wexpurchasetransaction.model.entity.User;
 import com.syphan.wexpurchasetransaction.model.mapper.UserMapper;
