@@ -1,11 +1,11 @@
 version: "3.7"
 
 services:
-  wexpt-db:
+  wexptdb:
     build:
       context: .
       dockerfile: ./docker-config/db/Dockerfile
-    container_name: wexpt-db
+    container_name: wexptdb
     volumes:
       - database_data:/var/lib/mysql
     environment:
@@ -13,15 +13,15 @@ services:
     networks:
       - wexptnetwork
 
-  wexpt-app:
+  wexptapp:
     build:
       context: .
       dockerfile: ./docker-config/app/Dockerfile
-    container_name: wexpt-app
+    container_name: wexptapp
     env_file:
       - .env
     depends_on:
-      - wexpt-db
+      - wexptdb
     ports:
       - "${APP_PORT}:2984"
     networks:
