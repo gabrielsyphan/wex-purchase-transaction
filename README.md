@@ -7,8 +7,26 @@ Repository for the Wex project.
 3. Run `docker-compose up -d --build` in the root folder
 4. Access the Api documentation at `http://localhost:2984/swagger-ui/index.html#/`
 
-## Dependencies
+### Dependencies
 - [Docker](https://docs.docker.com/install/)
+
+
+## How to run without docker
+You can also avoid using docker and run the application directly on your machine. To do so, follow the steps below.
+
+As the application uses MySQL, you need to have it installed and running on your machine, if you don't want to install
+it, you can change the `application.yml` file to use an in-memory database like H2 by copying the `application-test.yml` 
+content as example.
+
+1. Run `mvn clean install` in the root folder
+2. Copy the `.env.example` file to `.env` and fill the variables
+3. Run `java -jar target/wex-0.0.1-SNAPSHOT.jar` in the root folder
+4. Access the application at `http://localhost:2984/swagger-ui/index.html#/`
+
+### Dependencies
+- [Java 17](https://www.oracle.com/java/technologies/downloads/#java17)
+- [Maven](https://maven.apache.org/)
+- [MySQL](https://www.mysql.com/)
 
 ## Technologies
 - [Docker](https://www.docker.com/)
